@@ -1,0 +1,52 @@
+.upload-block {
+  margin-top: 50px;
+  .upload-drag {
+    max-width: 80%;
+    min-width: 500px;
+    margin: 0 auto;
+    padding: 50px;
+  }
+  .display {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 50%;
+    min-width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border: solid rgb(197, 197, 197);
+    border-width: 1px 0 0 1px;
+    box-shadow: 5px 5px 5px rgb(197, 197, 197);
+    transition: all 0.5s ease;
+
+    &:hover{
+      box-shadow: 10px 10px 10px rgb(197, 197, 197);
+    }
+    .display-title{
+      font-size: large;
+      font-weight: 600;
+    padding: 20px;      
+    }
+    .img {
+      max-width: 100%;
+      height: 300px;
+    }
+    .btns {
+      display: flex;
+      justify-content: center;
+      button {
+        margin: 10px;
+      }
+    }
+  }
+  .progress {
+    text-align: center;
+  }
+}
+
+.ant-upload-list,
+.ant-upload-list-text {
+  display: none;
+}

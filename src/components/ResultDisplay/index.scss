@@ -1,0 +1,28 @@
+.result-block {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+
+  .result-inner {
+    min-width: 500px;
+    max-width: 50%;
+    font-size: large;
+    font-weight: 600;
+    padding: 50px;
+
+    border: solid rgb(197, 197, 197);
+    border-width: 1px 0 0 1px;
+    box-shadow: 5px 5px 5px rgb(197, 197, 197);
+    transition: all 0.5s ease;
+    &:hover {
+      box-shadow: 10px 10px 10px rgb(197, 197, 197);
+    }
+    .result-title {
+      font-size: 1em;
+      font-weight: 400;
+    }
+    .result-text {
+      word-wrap: break-word;
+    }
+  }
+}
