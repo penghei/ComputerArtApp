@@ -45,7 +45,7 @@ const UploadPic: React.FC<IProps> = (props) => {
     await new Promise((resolve) => {
       setTimeout(resolve, 500);
     });
-    
+
     const imgFormData = new FormData();
     imgFormData.append("myImage", picFile as Blob);
 
@@ -57,12 +57,10 @@ const UploadPic: React.FC<IProps> = (props) => {
         timeout: 5000,
       });
 
-      if (!data.success) {
-        message.error("图片上传出错,请等下再试");
-        return;
-      }
       message.success("上传成功,正在生成结果……");
-      const { result: disease, solutions } = data;
+
+      const { result: disease, solutions, msg } = data;
+
       setResult({ canSee: true, value: { disease, solutions } });
       setControl(false);
       setSpinning(false);
@@ -73,6 +71,7 @@ const UploadPic: React.FC<IProps> = (props) => {
       setSpinning(false);
     }
   };
+  
   /**重新选择回调，会清除文件、详情和当前展示 */
   const giveupUpload = () => {
     setImgBase("");

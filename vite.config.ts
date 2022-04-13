@@ -8,7 +8,7 @@ export default defineConfig({
     proxy: {
       "/api": {
         target:
-          "https://www.fastmock.site/mock/c2d507bccd84aff367cbdfdd1a3c8f85/art",
+          "http://127.0.0.1",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
