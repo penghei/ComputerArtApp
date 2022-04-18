@@ -4,9 +4,10 @@ import { Upload, message, Button, Progress, Spin, Divider } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 
 import "./index.scss";
-import { useResetRecoilState, useSetRecoilState } from "recoil";
-import { ResultInfo } from "../../atom";
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
+import { ModalTypes, ResultInfo } from "../../atom";
 import axios from "axios";
+import { uploadImg } from "../../axios/upload";
 const { Dragger } = Upload;
 
 type Base64Type = string | ArrayBuffer | null;
@@ -22,6 +23,8 @@ const UploadPic: React.FC<IProps> = (props) => {
   const [spinning, setSpinning] = useState(false);
   const setResult = useSetRecoilState(ResultInfo); //结果显示框,在atom中
   const setDefault = useResetRecoilState(ResultInfo); // 把展示对象恢复为默认值
+
+  const modalTypes = useRecoilValue(ModalTypes); // 选择的模型类型
 
   /**获取图片base64格式,用于预览 */
   const getBase64: getBaseType = (file, callback) => {
@@ -49,34 +52,26 @@ const UploadPic: React.FC<IProps> = (props) => {
     const imgFormData = new FormData();
     imgFormData.append("myImage", picFile as Blob);
 
-    try {
-      const { data } = await axios.post("/api/index", imgFormData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        timeout: 5000,
-      });
-
-      message.success("上传成功,正在生成结果……");
-
-      const { result: disease, solutions, msg } = data;
-
-      setResult({ canSee: true, value: { disease, solutions } });
-      setControl(false);
-      setSpinning(false);
-    } catch (error) {
+    const data = await uploadImg(`/index/`, imgFormData);
+    if (!data) {
       message.error("上传失败");
-      console.error(error);
-    } finally {
       setSpinning(false);
+      return;
     }
+    const { result: disease, solutions, msg } = data;
+    message.success("上传成功,正在生成结果……");
+
+    setResult({ canSee: true, value: { disease, solutions } });
+    setControl(false);
+    setSpinning(false);
   };
-  
+
   /**重新选择回调，会清除文件、详情和当前展示 */
   const giveupUpload = () => {
     setImgBase("");
     setPicFile(undefined);
     setDefault();
+    setControl(true);
   };
 
   /**上传组件配置 */
@@ -107,8 +102,15 @@ const UploadPic: React.FC<IProps> = (props) => {
 
   return (
     <Spin spinning={spinning}>
-      <div className="upload-block">
-        <Dragger {...settings} className="upload-drag">
+      <div
+        className="upload-block"
+        //
+      >
+        <Dragger
+          {...settings}
+          className="upload-drag"
+          style={{ display: controlCanSee ? "block" : "none" }}
+        >
           <p className="ant-upload-drag-icon">
             <InboxOutlined />
           </p>

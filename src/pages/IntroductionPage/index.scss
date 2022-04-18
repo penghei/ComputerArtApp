@@ -1,0 +1,16 @@
+.intro-main {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 55px);
+  // flex: 1;
+  
+  .intro-list {
+    width: 15%;
+    min-width: 200px;
+    background-color: rgb(247, 251, 255);
+    overflow-y: auto;
+  }
+  .intro-content{
+    overflow-y: auto;
+  }
+}

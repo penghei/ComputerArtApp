@@ -7,9 +7,12 @@ import {
   Form,
   Select,
   Divider,
+  message,
 } from "antd";
 import React, { useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { ModalTypes } from "../../atom";
 import "./index.scss";
 
 const { Item } = Menu;
@@ -22,6 +25,7 @@ interface IChildProps {
 
 const index: React.FC<IProps> = (props) => {
   const [drawerVisible, setVisible] = useState(false);
+  const setModalTypes = useSetRecoilState(ModalTypes);
 
   const onClose = () => setVisible(false);
 
@@ -29,18 +33,24 @@ const index: React.FC<IProps> = (props) => {
     console.log(e.key);
     if (e.key === "setting") {
       setVisible(true);
+    } else {
+      props.history.push({
+        pathname: `/${e.key}`,
+      });
     }
   };
 
-  const handleFinishForm = (values: any) => {
+  const handleFinishForm = (values: { modal: "A" | "B"; types: string }) => {
     console.log(values);
+    if (values) message.success("修改成功!");
+    setModalTypes(values.types);
   };
 
   return (
     <>
       <Menu onClick={handleClick} mode="horizontal" className="navlist">
         <Item key="home">主页</Item>
-        <Item key="else">关于我们</Item>
+        <Item key="intro">常见病害知识</Item>
         <Item key="setting" className="drawer">
           识别选项
         </Item>
@@ -73,7 +83,7 @@ const SettingForm: React.FC<IChildProps> = ({ handleFinishForm, onClose }) => {
             <Radio.Button value="leaf" defaultChecked>
               叶子识别
             </Radio.Button>
-            <Radio.Button value="fruit">果实识别</Radio.Button>
+            <Radio.Button value="fruit">框框识别</Radio.Button>
             <Radio.Button value="bugs">害虫识别</Radio.Button>
           </Radio.Group>
         </Form.Item>

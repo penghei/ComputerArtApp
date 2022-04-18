@@ -1,0 +1,56 @@
+.fruit-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  white-space: pre-line;
+  .fruit-img {
+    width: 600px;
+  }
+  .fruit-article {
+    padding: 0 20%;
+
+    .fruit-name {
+      font-size: xxx-large;
+      margin-bottom: 20px;
+    }
+    .fruit-desp {
+    //   text-indent: 2em;
+      margin-bottom: 40px;
+    }
+    .fruit-disease {
+    //   text-indent: 2em;
+      margin-bottom: 40px;
+    }
+  }
+  .fruit-sicks{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    width: 80%;
+    padding: 0 50px;
+  }
+}
+.divider {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .start {
+    width: 20px;
+    height: 30px;
+    background-color: skyblue;
+  }
+  .text{
+      font-size: larger;
+      font-weight: 600;
+      padding: 10px;
+      white-space: nowrap;
+  }
+  .line{
+      height: 1px;
+      width: 100%;
+      background-color: gray;
+    //   margin-right: auto;
+  }
+}
