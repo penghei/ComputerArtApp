@@ -5,7 +5,7 @@ import { InboxOutlined } from "@ant-design/icons";
 
 import "./index.scss";
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from "recoil";
-import { ModalTypes, ResultInfo } from "../../atom";
+import { ModelTypes, ResultInfo } from "../../atom";
 import axios from "axios";
 import { uploadImg } from "../../axios/upload";
 const { Dragger } = Upload;
@@ -24,7 +24,7 @@ const UploadPic: React.FC<IProps> = (props) => {
   const setResult = useSetRecoilState(ResultInfo); //结果显示框,在atom中
   const setDefault = useResetRecoilState(ResultInfo); // 把展示对象恢复为默认值
 
-  const modalTypes = useRecoilValue(ModalTypes); // 选择的模型类型
+  const modelTypes = useRecoilValue(ModelTypes); // 选择的模型类型
 
   /**获取图片base64格式,用于预览 */
   const getBase64: getBaseType = (file, callback) => {
@@ -52,7 +52,7 @@ const UploadPic: React.FC<IProps> = (props) => {
     const imgFormData = new FormData();
     imgFormData.append("myImage", picFile as Blob);
 
-    const data = await uploadImg(`/index/`, imgFormData);
+    const data = await uploadImg(`/${modelTypes}/`, imgFormData);
     if (!data) {
       message.error("上传失败");
       setSpinning(false);
@@ -103,15 +103,15 @@ const UploadPic: React.FC<IProps> = (props) => {
   return (
     <Spin spinning={spinning}>
       <div
-        className="upload-block"
+        className="upload-block "
         //
       >
         <Dragger
           {...settings}
-          className="upload-drag"
+          className="upload-drag guide-upload"
           style={{ display: controlCanSee ? "block" : "none" }}
         >
-          <p className="ant-upload-drag-icon">
+          <p className="ant-upload-drag-icon ">
             <InboxOutlined />
           </p>
           <p className="ant-upload-text">点击或拖拽文件到此处</p>

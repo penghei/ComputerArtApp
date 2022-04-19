@@ -12,7 +12,7 @@ import {
 import React, { useState } from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { ModalTypes } from "../../atom";
+import { ModelTypes } from "../../atom";
 import "./index.scss";
 
 const { Item } = Menu;
@@ -25,7 +25,7 @@ interface IChildProps {
 
 const index: React.FC<IProps> = (props) => {
   const [drawerVisible, setVisible] = useState(false);
-  const setModalTypes = useSetRecoilState(ModalTypes);
+  const setModelTypes = useSetRecoilState(ModelTypes);
 
   const onClose = () => setVisible(false);
 
@@ -40,19 +40,24 @@ const index: React.FC<IProps> = (props) => {
     }
   };
 
-  const handleFinishForm = (values: { modal: "A" | "B"; types: string }) => {
+  const handleFinishForm = (values: { modal: "A" | "B"; types: 'disease' | 'pest' }) => {
     console.log(values);
     if (values) message.success("修改成功!");
-    setModalTypes(values.types);
+
+    setModelTypes(values.types);
   };
 
   return (
     <>
       <Menu onClick={handleClick} mode="horizontal" className="navlist">
-        <Item key="home">主页</Item>
-        <Item key="intro">常见病害知识</Item>
+        <Item key="home">
+          <div className="guide-home">主页</div>
+        </Item>
+        <Item key="intro">
+          <div className="guide-intro">常见病害知识</div>
+        </Item>
         <Item key="setting" className="drawer">
-          识别选项
+          <div className="guide-setting">识别选项</div>
         </Item>
       </Menu>
       <Drawer
@@ -76,20 +81,22 @@ const SettingForm: React.FC<IChildProps> = ({ handleFinishForm, onClose }) => {
         layout="vertical"
         hideRequiredMark
         onFinish={handleFinishForm}
-        initialValues={{ types: "leaf", model: "A" }}
+        initialValues={{ types: "disease", model: "A" }}
       >
         <Form.Item label="识别类型 : " name="types">
-          <Radio.Group buttonStyle="solid" size="large">
-            <Radio.Button value="leaf" defaultChecked>
-              叶子识别
+          <Radio.Group buttonStyle="solid">
+            <Radio.Button value="disease" defaultChecked>
+              常规病害识别
             </Radio.Button>
-            <Radio.Button value="fruit">框框识别</Radio.Button>
-            <Radio.Button value="bugs">害虫识别</Radio.Button>
+            <Radio.Button value="pest">害虫识别</Radio.Button>
+            <Radio.Button value="fruit" disabled>
+              框框识别
+            </Radio.Button>
           </Radio.Group>
         </Form.Item>
         <Divider />
         <Form.Item label="选择模型 : " name="model">
-          <Select size="large">
+          <Select>
             <Option value="A">模型A</Option>
             <Option value="B">模型B</Option>
             <Option value="C" disabled>

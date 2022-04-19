@@ -24,7 +24,7 @@ const index: React.FC<IProps> = (props) => {
             <Menu.Item
               key={engName}
               icon={<img style={{ maxWidth: "40px" }} src={img} />}
-              style={{ fontSize: "15px", marginBottom: "15px" }}
+              style={{ marginBottom: "15px",fontWeight:600 }}
             >
               {name}
             </Menu.Item>

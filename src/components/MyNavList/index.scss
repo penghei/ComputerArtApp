@@ -1,10 +1,10 @@
 .navlist {
-  // width: 80vw !important;
-  // margin: 0 auto !important;
   background-color: rgb(246, 246, 246) !important;
   padding: 0 80px !important;
   line-height: 55px !important;
   font-size: 15px !important;
+
+  box-shadow: 2px 2px 5px rgb(207, 207, 207) !important;
 
   li:nth-child(2) {
     margin-right: auto;

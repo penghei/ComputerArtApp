@@ -23,3 +23,5 @@ export interface RequestType<T> {
   methods: "POST" | "GET";
   data: T;
 }
+
+export type SelectedModelType = 'disease' | 'pest'

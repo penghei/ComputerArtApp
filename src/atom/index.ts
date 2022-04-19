@@ -1,6 +1,7 @@
 import { atom, selector } from "recoil";
 import { fruits } from "../asserts/fruits";
 import NoImg from "../asserts/noimg.jpg";
+import { SelectedModelType } from "../types";
 
 export const ResultInfo = atom({
   key: "ResultInfo",
@@ -24,17 +25,18 @@ export const SelectedFruitFilter = selector({
     const selectedFruit = get(SelectedFruit);
     const res = fruits.find((fruit) => fruit.engName === selectedFruit);
     if (res) return res;
-    else return {
-      name: "",
-      desp: "",
-      disease: "",
-      img: NoImg,
-      sicks:[]
-    }
+    else
+      return {
+        name: "",
+        desp: "",
+        disease: "",
+        img: NoImg,
+        sicks: [],
+      };
   },
 });
 
-export const ModalTypes = atom({
-  key:'ModalTypes',
-  default:'leaf'
-})
+export const ModelTypes = atom<SelectedModelType>({
+  key: "ModelTypes",
+  default: "disease",
+});

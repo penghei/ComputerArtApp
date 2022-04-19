@@ -13,4 +13,17 @@ export default defineConfig({
   //     },
   //   },
   // },
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+        modifyVars: {
+          // 主题修改
+          "@primary-color": "#7cb305", // 全局主色
+          "@font-size-base": "16px",
+
+        },
+      },
+    },
+  },
 });
