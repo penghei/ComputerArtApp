@@ -20,7 +20,9 @@ const index: React.FC<IProps> = (props) => {
       {canSee && (
         <main className="result-inner">
           <p className="result-title">当前识别结果为：{disease}</p>
-          <p className="result-text">建议解决方案: {solutions}</p>
+          {solutions && (
+            <p className="result-text">建议解决方案: {solutions}</p>
+          )}
           <Button onClick={searchBaidu} type="primary">
             跳转搜索解决方案
           </Button>

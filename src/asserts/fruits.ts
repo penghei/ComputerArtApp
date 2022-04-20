@@ -80,12 +80,12 @@ export const fruits = [
       },
       {
         name: "苹果疫腐病",
-        // img: appleYiFu.png,
+        img: 'https://pic.imgdb.cn/item/625fb99f239250f7c5b64f70.jpg',
         desp: "果实受害后果面产生不规则形，深浅不匀的暗红色病斑，边缘不清晰似水渍状。",
       },
       {
         name: "苹果黑星病",
-        // img: appleHeiXing.png,
+        img: 'https://pic.imgdb.cn/item/625fb9b7239250f7c5b68f79.jpg',
         desp: "是由苹果黑星菌侵染所引起的、发生在苹果上的病害。主要危害叶片或果实，叶柄、果柄、花芽、花器及新梢，从落花期到苹果成熟期均可危害。",
       },
 
@@ -162,7 +162,7 @@ export const fruits = [
       },
       {
         name: "樱桃褐斑病",
-        // img: cherryHeBan.png,
+        img: 'https://pic.imgdb.cn/item/625fb9d6239250f7c5b6d57d.jpg',
         desp: "褐斑病6月下旬或7月初始见发生,7月下旬进入发病高峰;",
       },
       {

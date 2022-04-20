@@ -43,7 +43,6 @@ const UploadPic: React.FC<IProps> = (props) => {
 
   /**确认上传回调,会启动进度条、让确认上传按钮消失，并设置结果 */
   const confirmUpload = async () => {
-    console.log(picFile);
     setSpinning(true);
     await new Promise((resolve) => {
       setTimeout(resolve, 500);
@@ -52,18 +51,33 @@ const UploadPic: React.FC<IProps> = (props) => {
     const imgFormData = new FormData();
     imgFormData.append("myImage", picFile as Blob);
 
-    const data = await uploadImg(`/${modelTypes}/`, imgFormData);
-    if (!data) {
+    // const data = await uploadImg(`/${modelTypes}/`, imgFormData);
+    try {
+      const { data } = await axios.post(
+        `http://127.0.0.1:8000/${modelTypes}/`,
+        imgFormData,
+        {
+          timeout: 20000,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log("UPLOAD_DATA:", data);
+
+      const { result: disease, solutions, msg } = data;
+      message.success("上传成功,正在生成结果……");
+
+      setResult({ canSee: true, value: { disease, solutions } });
+      setControl(false);
+      setSpinning(false);
+    } catch (err) {
       message.error("上传失败");
+      console.error('ERROR',err)
       setSpinning(false);
       return;
     }
-    const { result: disease, solutions, msg } = data;
-    message.success("上传成功,正在生成结果……");
-
-    setResult({ canSee: true, value: { disease, solutions } });
-    setControl(false);
-    setSpinning(false);
   };
 
   /**重新选择回调，会清除文件、详情和当前展示 */
@@ -81,11 +95,9 @@ const UploadPic: React.FC<IProps> = (props) => {
     onChange(info: any) {},
     onDrop(e: React.DragEvent) {
       const file = e.dataTransfer.files[0];
-      console.log("Dropped files", file);
     },
     /**上传之前回调，会设置图片、转base64并预览，让控制按钮可见 */
     beforeUpload(file: File) {
-      console.log("beforeupload", file);
       if (file.type !== "image/jpeg" && file.type !== "image/png") {
         message.error("只能上传 JPG/PNG 格式的图片!");
         return false;

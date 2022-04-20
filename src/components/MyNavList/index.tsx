@@ -30,7 +30,6 @@ const index: React.FC<IProps> = (props) => {
   const onClose = () => setVisible(false);
 
   const handleClick = (e: any) => {
-    console.log(e.key);
     if (e.key === "setting") {
       setVisible(true);
     } else {
@@ -41,9 +40,7 @@ const index: React.FC<IProps> = (props) => {
   };
 
   const handleFinishForm = (values: { modal: "A" | "B"; types: 'disease' | 'pest' }) => {
-    console.log(values);
-    if (values) message.success("修改成功!");
-
+    if (values) message.success("修改成功, 重新上传新图片时生效");
     setModelTypes(values.types);
   };
 
@@ -86,11 +83,11 @@ const SettingForm: React.FC<IChildProps> = ({ handleFinishForm, onClose }) => {
         <Form.Item label="识别类型 : " name="types">
           <Radio.Group buttonStyle="solid">
             <Radio.Button value="disease" defaultChecked>
-              常规病害识别
+              病害识别
             </Radio.Button>
             <Radio.Button value="pest">害虫识别</Radio.Button>
             <Radio.Button value="fruit" disabled>
-              框框识别
+              关键部位识别
             </Radio.Button>
           </Radio.Group>
         </Form.Item>

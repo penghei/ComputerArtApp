@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { RequestType, UploadResponseType } from "../types";
 
 const statusDic: {
@@ -25,8 +25,9 @@ export async function request<T = any>(config: RequestType<T>) {
 
   try {
     const { data } = await instance.request<UploadResponseType>(config);
+    console.log('RESPONSE_BODY',data)
     return data;
   } catch (err) {
-    console.warn(err);
+    console.error('RESPONSE_ERROR',err);
   }
 }

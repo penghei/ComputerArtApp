@@ -40,3 +40,8 @@ export const ModelTypes = atom<SelectedModelType>({
   key: "ModelTypes",
   default: "disease",
 });
+
+export const IntroContentDom = atom<HTMLDivElement|null>({
+  key: "IntroContentDom",
+  default: null,
+});

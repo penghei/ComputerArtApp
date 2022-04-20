@@ -11,7 +11,6 @@ interface IProps extends RouteComponentProps {}
 const index: React.FC<IProps> = (props) => {
   const setFruit = useSetRecoilState(SelectedFruit);
   const handleMenu = (e: any) => {
-    console.log(e.key);
     setFruit(e.key);
   };
 

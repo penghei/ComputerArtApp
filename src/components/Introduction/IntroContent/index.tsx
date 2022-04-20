@@ -3,7 +3,7 @@ import { Menu, Image } from "antd";
 import "./index.scss";
 import { fruits } from "../../../asserts/fruits";
 import { useRecoilValue } from "recoil";
-import { SelectedFruit, SelectedFruitFilter } from "../../../atom";
+import { IntroContentDom, SelectedFruitFilter } from "../../../atom";
 import { FruitsTypes } from "../../../types";
 import NoImg from "../../../asserts/noimg.jpg";
 import IntroBlock from "../IntroBlock";
@@ -22,8 +22,16 @@ const MyDivider: React.FC<{ title: string }> = ({ title }) => {
 
 const index: React.FC<IProps> = (props) => {
   const selectedFruit = useRecoilValue(SelectedFruitFilter);
-
+  const introContentDom = useRecoilValue(IntroContentDom);
   const { name, desp, disease, img, sicks } = selectedFruit;
+
+  useEffect(() => {
+    if (introContentDom) {
+      introContentDom.scrollTo({
+        top: 0,
+      });
+    }
+  });
 
   return (
     <div className="fruit-intro">
