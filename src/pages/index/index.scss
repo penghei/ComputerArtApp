@@ -1,0 +1,96 @@
+.index-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  background: url("https://pic.imgdb.cn/item/625fda25239250f7c5f93945.jpg")
+    no-repeat no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: inherit;
+    filter: blur(10px);
+    z-index: 1;
+  }
+  .index-block {
+    width: 100%;
+    height: 92vh;
+    z-index: 9;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+
+    .welcome {
+      margin-top: 30%;
+      text {
+        font-size: 2rem;
+        font-weight: 600;
+        color: white;
+      }
+      button {
+        width: 400px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+      }
+    }
+    .display {
+      margin-top: 30%;
+    }
+  }
+  .index-footer {
+    height: 8vh;
+    z-index: 9;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    border-radius: 15px 15px 0 0;
+    .block {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .font {
+        font-weight: 500;
+        font-size: 1rem;
+      }
+      &:active {
+        background-color: rgb(230, 230, 230);
+      }
+    }
+  }
+}
+
+.img-display {
+  display: flex;
+  flex-direction: column;
+  //   background-color: rgba(211, 254, 240, 0.2);
+  text {
+    text-align: center;
+    font-size: 2rem;
+    color: #fff;
+    margin: 20px;
+  }
+  .control {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    button {
+      margin: 10px;
+    }
+  }
+}
